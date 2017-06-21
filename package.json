@@ -1,0 +1,26 @@
+{
+  "name": "wifi-manager",
+  "version": "0.1.0",
+  "description": "A node module for querying and managing wifi networks on Archlinux",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmcclure/node-wifi-manager.git"
+  },
+  "keywords": [
+    "RaspberryPi",
+    "Node",
+    "Wifi"
+  ],
+  "author": "Ben McClure",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/bmcclure/node-wifi-manager/issues"
+  },
+  "homepage": "https://github.com/bmcclure/node-wifi-manager",
+  "dependencies": {
+    "underscore": "~1.7.0",
+    "async": "~0.9.0",
+    "systemctl": "~0.1.1",
+    "node-wifi": "~1.2.4"
+  }
+}
