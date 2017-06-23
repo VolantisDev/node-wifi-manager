@@ -4,16 +4,11 @@ var exec    = require("child_process").exec;
     Return a function which is responsible for using "iwlist scan" to figure
     out the list of visible SSIDs along with their RSSI (and other info)
 \*****************************************************************************/
-module.exports = function(cmd_options, callback) {
-    // Handle case where no options are passed in
-    if (typeof(cmd_options) == "function" && typeof(callback) == "undefined") {
-        callback    = cmd_options;
-        cmd_options = "";
-    }
-
+module.exports = function(callback) {
     var fields_to_extract = {
-        "ssid":            /ESSID:\"(.*)\"/,
-        "quality":         /Quality=(\d+)\/100/,
+        "ssid": /ESSID:\"(.*)\"/,
+        "quality": /Quality=(\d+)\/100/,
+        "frequency": /Frequency:(.+)\s+\(Channel/,
         "signal_strength": /.*Signal level=(\d+)\/100/,
         "encrypted":       /Encryption key:(on)/,
         "open":            /Encryption key:(off)/,
