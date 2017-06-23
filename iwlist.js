@@ -90,7 +90,7 @@ module.exports = function(callback) {
             }
 
             if (current_cell.quality) {
-                current_cell.quality = (current_cell.quality / 70) * 100;
+                current_cell.quality = Math.round(parseInt(current_cell.quality) / 70 * 100);
             }
         }
 
