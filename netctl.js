@@ -24,12 +24,12 @@ function write_template_to_file(template_path, file_name, context, callback) {
 }
 
 module.exports = {
-    enable_auto = _enable_auto,
-    disable_auto = _disable_auto,
-    start_auto = _start_auto,
-    stop_auto = _stop_auto,
-    restart_auto = _restart_auto,
-    save_wifi_profile = _save_wifi_profile
+    enable_auto: _enable_auto,
+    disable_auto: _disable_auto,
+    start_auto: _start_auto,
+    stop_auto: _stop_auto,
+    restart_auto: _restart_auto,
+    save_wifi_profile: _save_wifi_profile
 }
 
 function _enable_auto(interface_name, callback) {

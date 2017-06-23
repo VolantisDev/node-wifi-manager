@@ -6,13 +6,13 @@ module.exports = {
 
 function _status(wifi_interface, callback) {
     var fields = {
-        "hw_addr":         /HWaddr\s([^\s]+)/,
-        "inet_addr":       /inet addr:([^\s]+)/
+        hw_addr: /HWaddr\s([^\s]+)/,
+        inet_addr: /inet addr:([^\s]+)/
     };
 
     var output = {
-        hw_addr:      "<unknown>",
-        inet_addr:    "<unknown>"
+        hw_addr: '<unknown>',
+        inet_addr: '<unknown>'
     };
 
     exec("ifconfig " + wifi_interface, function(error, stdout, stderr) {
