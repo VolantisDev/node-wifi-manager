@@ -1,11 +1,11 @@
 var exec = require('child_process').exec;
 
 module.exports = {
-  status: status,
-  get_interface: get_interface
+  status: _status,
+  get_interface: _get_interface
 };
 
-function get_interface(callback) {
+function _get_interface(callback) {
     exec("iwconfig", function (error, stdout, stderr) {
         if (error) return callback(error);
 
@@ -21,7 +21,7 @@ function get_interface(callback) {
     });
 }
 
-function status(wifi_interface, callback) {
+function _status(wifi_interface, callback) {
     var fields = {
         "ap_addr":         /Access Point:\s([^\s]+)/,
         "ap_ssid":         /ESSID:\"([^\"]+)\"/,

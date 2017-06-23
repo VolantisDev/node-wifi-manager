@@ -1,20 +1,20 @@
 var exec = require("child_process").exec;
 
 module.exports = {
-    down: down,
-    up: up,
-    restart: restart
+    down: _down,
+    up: _up,
+    restart: _restart
 }
 
-function down(wifi_interface, callback) {
+function _down(wifi_interface, callback) {
     _exec(wifi_interface, 'down', callback);
 }
 
-function up(wifi_interface, callback) {
+function _up(wifi_interface, callback) {
     _exec(wifi_interface, 'up', callback);
 }
 
-function restart(wifi_interface, callback) {
+function _restart(wifi_interface, callback) {
     async.series([
         function down(next_step) {
             down(wifi_interface, next_step);

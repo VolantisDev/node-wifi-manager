@@ -1,10 +1,10 @@
 var exec = require('child_process').exec;
 
 module.exports = {
-  status: status,
+  status: _status,
 };
 
-function status(wifi_interface, callback) {
+function _status(wifi_interface, callback) {
     var fields = {
         "hw_addr":         /HWaddr\s([^\s]+)/,
         "inet_addr":       /inet addr:([^\s]+)/

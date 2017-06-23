@@ -10,20 +10,20 @@ var async = require("async"),
     connection information
 \*****************************************************************************/
 module.exports = {
-    get_wifi_interface: get_wifi_interface,
-    get_wifi_info: get_wifi_info,
-    restart_interface: restart_interface,
-    scan_networks: scan_networks,
-    is_wifi_enabled: is_wifi_enabled,
-    enable_wifi: enable_wifi
+    get_wifi_interface: _get_wifi_interface,
+    get_wifi_info: _get_wifi_info,
+    restart_interface: _restart_interface,
+    scan_networks: _scan_networks,
+    is_wifi_enabled: _is_wifi_enabled,
+    enable_wifi: _enable_wifi
 }
 
-function get_wifi_interface(callback) {
+function _get_wifi_interface(callback) {
     iwconfig.get_interface(callback);
 }
 
 // Get generic info on an interface
-function get_wifi_info(wifi_interface, callback) {
+function _get_wifi_info(wifi_interface, callback) {
     var output = [];
 
     async.series([
@@ -44,15 +44,15 @@ function get_wifi_info(wifi_interface, callback) {
     });
 }
 
-function restart_interface(wifi_interface, callback) {
+function _restart_interface(wifi_interface, callback) {
     iplink.restart(wifi_interface, callback);
 }
 
-function scan_networks(wifi_interface, callback) {
+function _scan_networks(wifi_interface, callback) {
     iwlist(wifi_interface, callback);
 }
 
-function is_wifi_enabled(wifi_interface, callback) {
+function _is_wifi_enabled(wifi_interface, callback) {
     get_wifi_info(wifi_interface, function(error, info) {
         if (error) return callback(error, null);
 
@@ -67,7 +67,7 @@ function is_wifi_enabled(wifi_interface, callback) {
 }
 
 // Disables AP mode and reverts to wifi connection
-function enable_wifi(wifi_interface, connection_info, callback) {
+function _enable_wifi(wifi_interface, connection_info, callback) {
     async.series([
         function save_wifi_profile(next_step) {
             netctl.save_wifi_profile(wifi_interface, connection_info, next_step);

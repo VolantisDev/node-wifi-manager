@@ -24,35 +24,35 @@ function write_template_to_file(template_path, file_name, context, callback) {
 }
 
 module.exports = {
-    enable_auto = enable_auto,
-    disable_auto = disable_auto,
-    start_auto = start_auto,
-    stop_auto = stop_auto,
-    restart_auto = restart_auto,
-    save_wifi_profile = save_wifi_profile
+    enable_auto = _enable_auto,
+    disable_auto = _disable_auto,
+    start_auto = _start_auto,
+    stop_auto = _stop_auto,
+    restart_auto = _restart_auto,
+    save_wifi_profile = _save_wifi_profile
 }
 
-function enable_auto(interface_name, callback) {
+function _enable_auto(interface_name, callback) {
     systemctl.enable("netctl-auto@" + interface_name, callback);
 }
 
-function disable_auto(interface_name, callback) {
+function _disable_auto(interface_name, callback) {
     systemctl.disable("netctl-auto@" + interface_name, callback);
 }
 
-function stop_auto(interface_name, callback) {
+function _stop_auto(interface_name, callback) {
     systemctl.stop("netctl-auto@" + interface_name, callback);
 }
 
-function start_auto(interface_name, callback) {
+function _start_auto(interface_name, callback) {
     systemctl.start("netctl-auto@" + interface_name, callback);
 }
 
-function restart_auto(interface_name, callback) {
+function _restart_auto(interface_name, callback) {
     systemctl.restart("netctl-auto@" + interface_name, callback);
 }
 
-function save_wifi_profile(wifi_interface, connection_info, callback) {
+function _save_wifi_profile(wifi_interface, connection_info, callback) {
     async.waterfall([
         function read_template_file(next_step) {
             fs.readFile("./templates/netctl/wifi.template", {encoding: "utf8"}, next_step);
