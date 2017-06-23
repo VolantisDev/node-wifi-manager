@@ -88,14 +88,16 @@ module.exports = function(callback) {
                     current_cell[key] = match[1];
                 }
             }
-
-            if (current_cell.quality) {
-                current_cell.quality = Math.round(parseInt(current_cell.quality) / 70 * 100);
-            }
         }
 
         // Add the last item we tracked
         append_previous_interface();
+
+        if (current_cell.quality) {
+            var quality = parseInt(current_cell.quality);
+            quality = Math.round(quality / 70 * 100);
+            current_cell.quality = quality.toString();
+        }
 
         output.sort(function (a, b) {
             a_quality = parseInt(a.quality);
