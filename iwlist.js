@@ -7,8 +7,6 @@ var exec    = require("child_process").exec;
 module.exports = function(callback) {
     var fields_to_extract = {
         "ssid": /ESSID:\"(.*)\"/,
-        "quality": /Quality=(\d+)\/70/,
-        "frequency": /Frequency:(.+)\s+\(Channel/,
         "signal_strength": /.*Signal level=(-\d+)/,
         "encrypted":       /Encryption key:(on)/,
         "open":            /Encryption key:(off)/,
@@ -81,6 +79,20 @@ module.exports = function(callback) {
                 continue;
             }
 
+            var match_frequency = line.match(/Frequency:(.+)\s+GHz/);
+            if (match_frequency) {
+                console.log(match_frequency[1]);
+                current_cell.frequency = Math.floor(parseFloat(match_frequency[1]) * 10) / 10;
+                console.log(current_cell.frequency);
+            }
+
+            var match_quality = line.match(/Quality=(\d+)\/70/);
+            if (match_quality) {
+                var quality = match_quality[1];
+                quality = Math.round(quality / 70 * 100);
+                current_cell.quality = quality.toString();
+            }
+
             // Handle other fields we want to extract
             for (var key in fields_to_extract) {
                 var match = line.match(fields_to_extract[key]);
@@ -90,24 +102,20 @@ module.exports = function(callback) {
             }
         }
 
-        if (current_cell.quality) {
-            var quality = parseInt(current_cell.quality);
-            quality = Math.round(quality / 70 * 100);
-            current_cell.quality = quality.toString();
-        }
-
         // Add the last item we tracked
         append_previous_interface();
 
-        output.sort(function (a, b) {
-            a_quality = parseInt(a.quality);
-            b_quality = parseInt(b.quality);
-            if (a_quality < b_quality)
-                return -1;
-            if (a_quality > b_quality)
-                return 1;
-            return 0;
-        });
+        for (var key in output) {
+            output[key].sort(function (a, b) {
+                a_quality = parseInt(a.quality);
+                b_quality = parseInt(b.quality);
+                if (a_quality < b_quality)
+                    return -1;
+                if (a_quality > b_quality)
+                    return 1;
+                return 0;
+            });
+        }
 
         return callback(null, output);
     });
