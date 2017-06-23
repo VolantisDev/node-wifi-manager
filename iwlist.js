@@ -104,13 +104,13 @@ module.exports = function(callback) {
         append_previous_interface();
 
         for (var key in output) {
-            output[key].sort(function (a, b) {
+            output[key].scan_results.sort(function (a, b) {
                 a_quality = parseInt(a.quality);
                 b_quality = parseInt(b.quality);
                 if (a_quality < b_quality)
-                    return -1;
-                if (a_quality > b_quality)
                     return 1;
+                if (a_quality > b_quality)
+                    return -1;
                 return 0;
             });
         }
