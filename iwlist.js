@@ -90,14 +90,14 @@ module.exports = function(callback) {
             }
         }
 
-        // Add the last item we tracked
-        append_previous_interface();
-
         if (current_cell.quality) {
             var quality = parseInt(current_cell.quality);
             quality = Math.round(quality / 70 * 100);
             current_cell.quality = quality.toString();
         }
+
+        // Add the last item we tracked
+        append_previous_interface();
 
         output.sort(function (a, b) {
             a_quality = parseInt(a.quality);
