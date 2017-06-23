@@ -7,9 +7,9 @@ var exec    = require("child_process").exec;
 module.exports = function(callback) {
     var fields_to_extract = {
         "ssid": /ESSID:\"(.*)\"/,
-        "quality": /Quality=(\d+)\/100/,
+        "quality": /Quality=(\d+)\/70/,
         "frequency": /Frequency:(.+)\s+\(Channel/,
-        "signal_strength": /.*Signal level=(\d+)/,
+        "signal_strength": /.*Signal level=(-\d+)/,
         "encrypted":       /Encryption key:(on)/,
         "open":            /Encryption key:(off)/,
     };
