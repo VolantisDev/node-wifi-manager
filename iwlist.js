@@ -90,7 +90,7 @@ module.exports = function(callback) {
             }
 
             if (current_cell.quality) {
-                current_cell.quality = current_cell.quality / 70 * 100;
+                current_cell.quality = (current_cell.quality / 70) * 100;
             }
         }
 
@@ -98,11 +98,11 @@ module.exports = function(callback) {
         append_previous_interface();
 
         output.sort(function (a, b) {
-            a_strength = parseInt(a.signal_strength);
-            b_strength = parseInt(b.signal_strength);
-            if (a_strength < b_strength)
+            a_quality = parseInt(a.quality);
+            b_quality = parseInt(b.quality);
+            if (a_quality < b_quality)
                 return -1;
-            if (a_strength > b_strength)
+            if (a_quality > b_quality)
                 return 1;
             return 0;
         });
