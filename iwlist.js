@@ -89,15 +89,8 @@ module.exports = function(callback) {
                 }
             }
 
-            if (current_cell.signal_strength) {
-                var signal_strength = current_cell.signal_strength;
-                if (signal_strength <= -100) {
-                    current_cell.signal_strength = 0;
-                } else if (signal_strength >= -50) {
-                    current_cell.signal_strength = 100;
-                } else {
-                    current_cell.signal_strength = 2 * (signal_strength + 100);
-                }
+            if (current_cell.quality) {
+                current_cell.quality = current_cell.quality / 70 * 100;
             }
         }
 
