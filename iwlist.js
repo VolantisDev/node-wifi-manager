@@ -81,9 +81,7 @@ module.exports = function(callback) {
 
             var match_frequency = line.match(/Frequency:(.+)\s+GHz/);
             if (match_frequency) {
-                console.log(match_frequency[1]);
                 current_cell.frequency = Math.floor(parseFloat(match_frequency[1]) * 10) / 10;
-                console.log(current_cell.frequency);
             }
 
             var match_quality = line.match(/Quality=(\d+)\/70/);
