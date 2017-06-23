@@ -9,7 +9,7 @@ module.exports = function(callback) {
         "ssid": /ESSID:\"(.*)\"/,
         "quality": /Quality=(\d+)\/100/,
         "frequency": /Frequency:(.+)\s+\(Channel/,
-        "signal_strength": /.*Signal level=(\d+)\/100/,
+        "signal_strength": /.*Signal level=(\d+)/,
         "encrypted":       /Encryption key:(on)/,
         "open":            /Encryption key:(off)/,
     };
@@ -86,6 +86,17 @@ module.exports = function(callback) {
                 var match = line.match(fields_to_extract[key]);
                 if (match) {
                     current_cell[key] = match[1];
+                }
+            }
+
+            if (current_cell.signal_strength) {
+                var signal_strength = current_cell.signal_strength;
+                if (signal_strength <= -100) {
+                    current_cell.signal_strength = 0;
+                } else if (signal_strength >= -50) {
+                    current_cell.signal_strength = 100;
+                } else {
+                    current_cell.signal_strength = 2 * (signal_strength + 100);
                 }
             }
         }
