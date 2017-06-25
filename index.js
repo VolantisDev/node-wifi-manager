@@ -56,7 +56,7 @@ function _scan_networks(wifi_interface, callback) {
     iwlist(wifi_interface, callback)
 }
 
-function is_wifi_enabled(wifi_interface, callback) {
+function _is_wifi_enabled(wifi_interface, callback) {
     netctl.is_auto_enabled(wifi_interface, callback)
 }
 
