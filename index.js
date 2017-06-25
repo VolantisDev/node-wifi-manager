@@ -18,6 +18,7 @@ module.exports = {
     is_wifi_connected: _is_wifi_connected,
     save_profile: _save_profile,
     delete_profile: _delete_profile,
+    is_profile_saved: _is_profile_saved,
     enable_wifi: _enable_wifi,
     disable_wifi: _disable_wifi
 }
@@ -94,6 +95,10 @@ function _delete_profile(wifi_interface, ssid, callback) {
             netctl.restart_auto(wifi_interface, next_step)
         }
     ], callback)
+}
+
+function _is_profile_saved(wifi_interface, ssid, callback) {
+    netctl.is_wifi_profile_saved(wifi_interface, ssid, callback)
 }
 
 function _enable_wifi(wifi_interface, callback) {

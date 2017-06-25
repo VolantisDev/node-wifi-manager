@@ -31,7 +31,8 @@ module.exports = {
     restart_auto: _restart_auto,
     is_auto_enabled: _is_auto_enabled,
     save_wifi_profile: _save_wifi_profile,
-    delete_wifi_profile: _delete_wifi_profile
+    delete_wifi_profile: _delete_wifi_profile,
+    is_wifi_profile_saved: _is_wifi_profile_saved
 }
 
 function _enable_auto(interface_name, callback) {
@@ -72,4 +73,10 @@ function _save_wifi_profile(wifi_interface, connection_info, callback) {
 
 function _delete_wifi_profile(wifi_interface, wifi_ssid, callback) {
     fs.unlink('/etc/netctl/' + wifi_interface + '-' + wifi_ssid, callback)
+}
+
+function _is_wifi_profile_saved(wifi_interface, wifi_ssid, callback) {
+    var exists = fs.existsSync('/etc/netctl/' + wifi_interface + '-' + wifi_ssid)
+
+    callback(null, exists)
 }
